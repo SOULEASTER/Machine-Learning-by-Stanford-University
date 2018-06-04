@@ -61,44 +61,25 @@ Theta2_grad = zeros(size(Theta2));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
-%%完全向量化版  
-a1 = [ones(m,1) X]; %5000*401  
-z2 = a1*Theta1';  %5000*25  
-a2 = [ones(size(z2,1),1) sigmoid(z2)]; %5000*(25+1)  
-z3 = a2*Theta2'; %5000*10  
-a3 = sigmoid(z3);  
-h=a3;  
-%-----------------Part 3: Compute Cost (Feedforward)-------   -------------  
-Y=zeros(m,num_labels);  
-for i=1:num_labels  
-    Y(:,i)=(y==i);  
-end  
-J = 1/m*sum(sum(-Y.*log(h)-(1-Y).*log(1-h)));  
-%--------------------------------------------------------------------------  
-%%正则化后  
-J = J + lambda/2/m*( sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)) );  
-% compute delta  
-delta3=zeros(m, num_labels);  
-for k = 1 : num_labels  
-    delta3(:,k) = a3(:,k) - (y==k); %5000*10  
-end  
-delta2 = delta3 * Theta2 .* [ones(size(z2,1),1) sigmoidGradient(z2)]; %5000*26  
-  
-%compute Delta  
-Delta1 = delta2(:,2:end)' * a1;  %25*401  
-Delta2 = delta3' * a2; %10*26  
-  
-% compute Theta_grad  
-Theta1_grad = 1/m*Delta1;  
-Theta2_grad = 1/m*Delta2;  
-  
-% 正则化grad  
-reg1 = lambda/m*Theta1;  
-reg2 = lambda/m*Theta2;  
-reg1(:,1) = 0;  
-reg2(:,1) = 0;  
-Theta1_grad = Theta1_grad + reg1;  
-Theta2_grad = Theta2_grad + reg2;  
+h = sigmoid(X*)
+J = 1/m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 % -------------------------------------------------------------
 
 % =========================================================================
