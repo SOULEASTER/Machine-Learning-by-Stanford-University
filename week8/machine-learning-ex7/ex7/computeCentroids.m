@@ -25,13 +25,21 @@ centroids = zeros(K, n);
 %
 % Note: You can use a for-loop over the centroids to compute this.
 %
-
-
-
-
-
-
-
+% for i = 1 : K
+%     all_K = 0;    %用于存储x的和
+%     count = sum(idx == i);    %用于存储分配到centroids(i, :)中元素的个数
+%     temp_meet = find(idx == i);    %找出分配到centroids(i, :)中所有元素的行索引
+%     for j = 1 : numel(temp_meet)   
+%         all_K = all_K + X(temp_meet(j), :);
+%     end
+%     centroids(i, :) = all_K / count;
+% end
+ 
+%第二种方法（向量化表示）
+for i = 1 : K
+    centroids(i, :) = (X' * (idx == i)) / sum(idx == i);    
+    %(idx ==i)目的是将不是i值的X中对应数据变为0.
+end
 
 % =============================================================
 
